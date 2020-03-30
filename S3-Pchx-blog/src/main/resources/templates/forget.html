@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
+<link rel="stylesheet" href="css/reg.css">
+<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="js/easyform.js"></script>
+<style type="text/css">
+td[id] {
+	color: red
+}
+</style>
+
+<script type="text/javascript">
+	function sendVcode() {
+			$.post("sendVcode",
+				{account:$("input[name='account']").val()},
+				function(result){
+					alert(result.msg);
+				}
+			)
+	}
+	function changePwd() {
+		$.post("changePwd",
+			{account:$("input[name='account']").val(),
+			pwd:$("input[name='pwd']").val(),
+			repwd:$("input[name='repwd']").val(),
+			vcode:$("input[name='vcode']").val()},
+			function(result){
+				alert(result.msg);
+			}
+		)
+}
+</script>
+</head>
+<body>
+	<br>
+	<div class="form-div">
+		<form id="regform" action="" method="post">
+
+			<table>
+
+				<tr>
+					<td>用户名</td>
+					<td><input name="account" type="text">
+					</td>
+				</tr>
+
+				<tr>
+					<td>验证码</td>
+					<td><input name="vcode" type="text"></td>
+				</tr>
+
+
+				<tr>
+					<td>密码</td>
+					<td><input name="pwd" type="password"></td>
+				</tr>
+
+				<tr>
+					<td>确认密码</td>
+					<td><input name="repwd" type="password"></td>
+				</tr>
+
+			</table>
+
+			<div class="buttons">
+				<input value="修改密码" onclick="changePwd()" type="button"
+					style="margin-right: 20px; margin-top: 20px;"> <input
+					value="发送邮箱验证码" type="button" onclick="sendVcode()"
+					style="margin-right:45px; margin-top: 20px;">
+			</div>
+
+			<br class="clear">
+		</form>
+	</div>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#regform').easyform();
+		});
+	</script>
+	<div
+		style="text-align: center; margin: 50px 0; font: normal 14px/24px 'MicroSoft YaHei';">
+
+	</div>
+</body>
+</html>
